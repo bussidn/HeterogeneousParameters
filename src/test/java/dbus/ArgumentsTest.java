@@ -2,6 +2,7 @@ package dbus;
 
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,13 +49,13 @@ public class ArgumentsTest {
     }
 
     @Test
-    public void parameters_should_return_empty_when_asked_with_the_wrong_type() {
+    public void parameter_list_should_return_a_list_of_the_right_type() {
         // given
         Arguments arguments = new Arguments();
-        String key = "string argument";
+        String key = "list of string argument";
         // when
-        arguments.putArgument(key, String.class, "value");
+        arguments.putArgumentList(key, String.class, List.of("value"));
         // then
-        assertThat(arguments.getArgument(key, Short.class)).isEqualTo(Optional.empty());
+        assertThat(arguments.getArgumentList(key, String.class)).isEqualTo(List.of("value"));
     }
 }
